@@ -151,11 +151,11 @@ namespace PU_CampusTour.Controllers
                         s.Username,
                         s.Password
                     };
-            if (username != null && password != null)
+            if (c["Username"] != null && c["Password"] != null)
             {
                 foreach (var t in q)
                 {
-                    if (t.Username == username && t.Password == password)
+                    if (t.Username == c["Password"] && t.Password == c["Password"])
                     {
                         //ViewBag.Message = "";
                         return RedirectToAction("location");
