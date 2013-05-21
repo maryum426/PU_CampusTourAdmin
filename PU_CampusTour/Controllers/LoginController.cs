@@ -29,7 +29,7 @@ namespace PU_CampusTour.Controllers
             longi = c["Longitude"];
             lat = c["Latitude"];
 
-            
+        
             using (DatabaseEntities4 ctx = new DatabaseEntities4())
             {
                 var q = from s in ctx.Places where s.Name == name select s;
