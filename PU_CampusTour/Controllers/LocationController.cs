@@ -23,7 +23,7 @@ namespace PU_CampusTour.Controllers
             
             
                 ViewBag.Message = "Done";
-                using (DatabaseEntities4 ctx = new DatabaseEntities4())
+                using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
                 {
                     // saving dummy values in database
                    /* Place p = new Place()
@@ -77,7 +77,7 @@ namespace PU_CampusTour.Controllers
             lat = c["Latitude"];
 
 
-            using (DatabaseEntities4 ctx = new DatabaseEntities4())
+            using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
             {
                 Place p = new Place()
                 {
@@ -91,7 +91,7 @@ namespace PU_CampusTour.Controllers
 
                 };
 
-                ctx.AddToPlaces(p);
+                ctx.Places.Add(p);
                 ctx.SaveChanges();
 
 
@@ -107,15 +107,15 @@ namespace PU_CampusTour.Controllers
         string url;
         public ActionResult Edit(int id)
         {
-            DatabaseEntities4 db = new DatabaseEntities4();
+            dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
             var q = from s in db.Places
-                    where s.Place_Id == id
+                    where s.Id == id
                     select s;
             //Pro_Class product = new Pro_Class();
             
             foreach (var t in q)
             {
-                ViewBag.id = t.Place_Id;
+                ViewBag.id = t.Id;
             }
             return View();
         }
@@ -137,11 +137,11 @@ namespace PU_CampusTour.Controllers
             lat = c["Latitude"];
 
             int id = Convert.ToInt32(c["id"]);
-            using (DatabaseEntities4 ctx = new DatabaseEntities4())
+            using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
             {
 
                 var q = from s in ctx.Places
-                        where s.Place_Id == id
+                        where s.Id == id
                         select s;
                 foreach (var t in q)
                 {
@@ -169,13 +169,13 @@ namespace PU_CampusTour.Controllers
 
         public ActionResult Delete(int id)
         {
-            DatabaseEntities4 db = new DatabaseEntities4();
+            dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
             var q = from s in db.Places
-                    where s.Place_Id == id
+                    where s.Id == id
                     select s;
             foreach (var t in q)
             {
-                db.Places.DeleteObject(t);
+                db.Places.Remove(t);
             }
             db.SaveChanges();
 
@@ -187,7 +187,7 @@ namespace PU_CampusTour.Controllers
         
         public ActionResult DeleteAll(int[] deleteValues)
         {
-            DatabaseEntities4 db = new DatabaseEntities4();
+            dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
             
             int[] MyCheckboxes = deleteValues;
 
@@ -195,11 +195,11 @@ namespace PU_CampusTour.Controllers
             foreach (var item in MyCheckboxes)
             {
                 var q = from s in db.Places
-                        where s.Place_Id == Convert.ToInt32(item)
+                        where s.Id == Convert.ToInt32(item)
                         select s;
                 foreach (var t in q)
                 {
-                    db.Places.DeleteObject(t);
+                    db.Places.Remove(t);
                 }
                 db.SaveChanges();
             }

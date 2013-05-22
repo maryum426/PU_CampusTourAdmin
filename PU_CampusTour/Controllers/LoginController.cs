@@ -30,7 +30,7 @@ namespace PU_CampusTour.Controllers
             lat = c["Latitude"];
 
         
-            using (DatabaseEntities4 ctx = new DatabaseEntities4())
+            using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
             {
                 var q = from s in ctx.Places where s.Name == name select s;
 
@@ -75,7 +75,7 @@ namespace PU_CampusTour.Controllers
 
 
             ViewBag.Message = "Done";
-            using (DatabaseEntities4 ctx = new DatabaseEntities4())
+            using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
             {
                 // saving dummy values in database
                 /* Place p = new Place()
@@ -103,7 +103,7 @@ namespace PU_CampusTour.Controllers
         
         public ActionResult DeleteAll(int[] deleteValues)
         {
-            DatabaseEntities4 db = new DatabaseEntities4();
+            dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
 
             int[] MyCheckboxes = deleteValues;
 
@@ -111,11 +111,11 @@ namespace PU_CampusTour.Controllers
             foreach (var item in MyCheckboxes)
             {
                 var q = from s in db.Places
-                        where s.Place_Id == Convert.ToInt32(item)
+                        where s.Id == Convert.ToInt32(item)
                         select s;
                 foreach (var t in q)
                 {
-                    db.Places.DeleteObject(t);
+                    db.Places.Remove(t);
                 }
                 db.SaveChanges();
             }
@@ -125,7 +125,7 @@ namespace PU_CampusTour.Controllers
         [HttpPost]
         public ActionResult login(FormCollection c)
         {
-            DatabaseEntities4 ctx = new DatabaseEntities4();
+            dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities();
             // adding dummy data
             
             /*Admin p = new Admin()
@@ -155,7 +155,7 @@ namespace PU_CampusTour.Controllers
             {
                 foreach (var t in q)
                 {
-                    if (t.Username == c["Password"] && t.Password == c["Password"])
+                    if (t.Username == c["Username"] && t.Password == c["Password"])
                     {
                         //ViewBag.Message = "";
                         return RedirectToAction("location");

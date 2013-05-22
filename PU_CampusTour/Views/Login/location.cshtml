@@ -1,9 +1,10 @@
 ﻿@using PU_CampusTour.Models;
 
 @{
-    DatabaseEntities4 db = new DatabaseEntities4();
+    dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
 
     var q = from s in db.Places select s;
+     
     
   
 }
@@ -12,7 +13,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IN ADMIN PANEL | Powered by INDEZINER</title>
+<title>Admin Panel</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
 <script type="text/javascript" src="../clockp.js"></script>
 <script type="text/javascript" src="../clockh.js"></script> 
@@ -253,15 +254,15 @@
      @foreach (var row in q) {
           <tr>
            
-            <td><input type="checkbox" name="MyCheckboxes" value="@row.Place_Id" /></td>
+            <td><input type="checkbox" name="MyCheckboxes" value="@row.Id" /></td>
             <td> @row.Name</td>
             <td> @row.Description</td>
             <td>@row.Longitude</td>
             <td> @row.Latitude</td>
            
             <!--<td><a href="~/Admin/Admin_Update/row.Id">Edit</a></td>-->
-            <td> <a href="@Url.Action("Edit","Location", new { id = @row.Place_Id })"><img src="../images/user_edit.png" alt="" title="" border="0" /></a> </td>            
-          <td><a href="@Url.Action("Delete", "Location", new { id = @row.Place_Id })"><img src="../images/trash.png" alt="" title="" border="0" /></a></td>
+            <td> <a href="@Url.Action("Edit","Location", new { id = @row.Id })"><img src="../images/user_edit.png" alt="" title="" border="0" /></a> </td>            
+          <td><a href="@Url.Action("Delete", "Location", new { id = @row.Id })"><img src="../images/trash.png" alt="" title="" border="0" /></a></td>
           </tr>
         }
     </tbody>
@@ -367,7 +368,7 @@
     <div class="footer">
     
     	<div class="left_footer"></div>
-    	<div class="right_footer"><a href="http://indeziner.com"></a></div>
+    	<div class="right_footer"></div>
     
     </div>
 
