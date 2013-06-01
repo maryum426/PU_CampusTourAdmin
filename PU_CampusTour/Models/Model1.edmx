@@ -37,13 +37,14 @@
           <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Image" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Category_Id" Type="int" Nullable="false" />
+          <Property Name="isApproved" Type="nvarchar" Nullable="false" MaxLength="5" />
         </EntityType>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbf522ec9140464818abf6a1c4013479aeModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="dbf522ec9140464818abf6a1c4013479aeEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dbf522ec9140464818abf6a1c4013479aeEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="dbf522ec9140464818abf6a1c4013479aeModel.Admin" />
           <EntitySet Name="Categories" EntityType="dbf522ec9140464818abf6a1c4013479aeModel.Category" />
           <EntitySet Name="Places" EntityType="dbf522ec9140464818abf6a1c4013479aeModel.Place" />
@@ -75,13 +76,14 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Image" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="Category_Id" Type="Int32" Nullable="false" />
+          <Property Name="isApproved" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbf522ec9140464818abf6a1c4013479aeModelStoreContainer" CdmEntityContainer="dbf522ec9140464818abf6a1c4013479aeEntities">
+        <EntityContainerMapping StorageEntityContainer="dbf522ec9140464818abf6a1c4013479aeModelStoreContainer" CdmEntityContainer="dbf522ec9140464818abf6a1c4013479aeEntities1">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="dbf522ec9140464818abf6a1c4013479aeModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
@@ -110,6 +112,7 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="isApproved" ColumnName="isApproved" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

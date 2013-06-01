@@ -10,6 +10,11 @@ namespace PU_CampusTour.Controllers
     {
         //
         // GET: /Login/
+
+        public ActionResult Index()
+        {
+            return RedirectToAction("location","Login");
+        }
         public ActionResult Edit()
         {
             return View();
@@ -30,7 +35,7 @@ namespace PU_CampusTour.Controllers
             lat = c["Latitude"];
 
         
-            using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
+            using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
             {
                 var q = from s in ctx.Places where s.Name == name select s;
 
@@ -75,7 +80,7 @@ namespace PU_CampusTour.Controllers
 
 
             ViewBag.Message = "Done";
-            using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
+            using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
             {
                 // saving dummy values in database
                 /* Place p = new Place()
@@ -103,7 +108,7 @@ namespace PU_CampusTour.Controllers
         
         public ActionResult DeleteAll(int[] deleteValues)
         {
-            dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
+            dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
 
             int[] MyCheckboxes = deleteValues;
 
@@ -125,7 +130,7 @@ namespace PU_CampusTour.Controllers
         [HttpPost]
         public ActionResult login(FormCollection c)
         {
-            dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities();
+            dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1();
             // adding dummy data
             
             /*Admin p = new Admin()

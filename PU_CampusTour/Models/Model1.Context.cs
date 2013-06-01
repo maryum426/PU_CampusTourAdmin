@@ -13,10 +13,10 @@ namespace PU_CampusTour.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class dbf522ec9140464818abf6a1c4013479aeEntities : DbContext
+    public partial class dbf522ec9140464818abf6a1c4013479aeEntities1 : DbContext
     {
-        public dbf522ec9140464818abf6a1c4013479aeEntities()
-            : base("name=dbf522ec9140464818abf6a1c4013479aeEntities")
+        public dbf522ec9140464818abf6a1c4013479aeEntities1()
+            : base("name=dbf522ec9140464818abf6a1c4013479aeEntities1")
         {
         }
     

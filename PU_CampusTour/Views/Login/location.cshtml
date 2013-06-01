@@ -1,9 +1,11 @@
 ﻿@using PU_CampusTour.Models;
 
 @{
-    dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
+    dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
 
-    var q = from s in db.Places select s;
+    var q = from s in db.Places where s.isApproved == "True" select s ;
+
+    var data2 = from s in db.Categories select s;
      
     
   
@@ -69,8 +71,8 @@
     
                     <div class="menu">
                     <ul>
-                    <li><a class="current" href="#">Admin Home</a></li>
-                    <li><a href="">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a class="current" href="@Url.Action("location","Login")">Admin Home</a></li>
+                    <li><a href="@Url.Action("Request","Location")">Requests<!--[if IE 7]><!--></a><!--<![endif]-->
                     <!--[if lte IE 6]><table><tr><td><![endif]-->
                         <!--<ul>
                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
@@ -81,7 +83,7 @@
                         </ul>
                     <!--[if lte IE 6]></td></tr></table></a><![endif]-->
                     </li>
-                    <li><a href="">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->
+                    
                     <!--[if lte IE 6]><table><tr><td><![endif]
                         <ul>
                         <li><a href="" title="">Lorem ipsum dolor sit amet</a></li>
@@ -179,7 +181,7 @@
                     </li>
                     <li><a href="">Templates</a></li>
                     <li><a href="">Custom details</a></li>-->
-                    <li><a href="">Contact</a></li>
+                    
                     </ul>
                     </div> 
                     
@@ -203,20 +205,12 @@
             
                 <a class="menuitem submenuheader" href="">Categories </a>
                 <div class="submenu">
+                  
                     <ul>
-                    <li><a href="">Departments</a></li>
-                    <li><a href="">Hostel</a></li>
-                    <li><a href="">Cafeteria</a></li>
-                    <li><a href="">Market</a></li>
-                    <li><a href="">Park</a></li>
-                    <li><a href="">Mosque</a></li>
-                    <li><a href="">Hospital</a></li>
-                    <li><a href="">Residential Area</a></li>
-                    <li><a href="">VC Office</a></li>
-                    <li><a href="">Bus Stop</a></li>
-                    <li><a href="">Bank</a></li>
-                    <li><a href="">Library</a></li>
-                    <li><a href="">Underpass</a></li>
+                    @foreach(var k in data2)
+                    {
+                    <li><a href="">@k.Name</li>
+                    }
                     </ul>
                 </div>
                 

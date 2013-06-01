@@ -1,12 +1,16 @@
-﻿@{
+﻿@using PU_CampusTour.Models;
+@{
     ViewBag.Title = "Add";
+    dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
+
+    var data2 = from s in db.Categories select s;
 }
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>IN ADMIN PANEL | Powered by PU</title>
+<title>Add Place</title>
 <link rel="stylesheet" type="text/css" href="~/style.css" />
 <script type="text/javascript" src="~/clockp.js"></script>
 <script type="text/javascript" src="~/clockh.js"></script> 
@@ -62,13 +66,13 @@
     
                     <div class="menu">
                     <ul>
-                    <li><a class="current" href="">Admin Home</a></li>
-                    <li><a href="">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]-->
+                    <li><a href="@Url.Action("location","Login")">Admin Home</a></li>
+                    <li><a href="@Url.Action("Request","Location")">Requests<!--[if IE 7]><!--></a><!--<![endif]-->
                    
                     </li>
-                    <li><a href="">Manage Users<!--[if IE 7]><!--></a><!--<![endif]-->
                     
-                    <li><a href="">Contact</a></li>
+                    
+                   
                     </ul>
                     </div> 
                     
@@ -92,24 +96,17 @@
             
                 <a class="menuitem submenuheader" href="">Subcategories</a>
                 <div class="submenu">
+                    
                     <ul>
-                    <li><a href="">Departments</a></li>
-                    <li><a href="">Hostel</a></li>
-                    <li><a href="">Cafeteria</a></li>
-                    <li><a href="">Market</a></li>
-                    <li><a href="">Park</a></li>
-                    <li><a href="">Mosque</a></li>
-                    <li><a href="">Hospital</a></li>
-                    <li><a href="">Residential Area</a></li>
-                    <li><a href="">VC Office</a></li>
-                    <li><a href="">Bus Stop</a></li>
-                    <li><a href="">Bank</a></li>
-                    <li><a href="">Library</a></li>
-                    <li><a href="">Underpass</a></li>
+                    @foreach(var k in data2)
+                    {
+                    <li><a href="">@k.Name</li>
+                    }
                     </ul>
+                    
                 </div>
                 
-                <a class="menuitem submenuheader" href="">Add new Place</a>
+                <a class="menuitem submenuheader" href="@Url.Action("Add","Location")">Add new Place</a>
                
                 
                     
@@ -152,10 +149,19 @@
                     
                     <label ><strong>Latitude:</strong></label>
                     <br />
-                    <input type="text" name="Latitude"  />
-                    
-                                    
+                    <input type="text" name="Latitude"  />            
                     <br />
+
+                    <label ><strong>Category:</strong></label>
+                    <br />
+                    <select   name="Category" style="margin-left:5px;margin-top:5px;font-size:15px;color:Black;font-family:Calibri;font-weight:bold">
+                    <option value="Empty"></option>           
+                    @foreach(var k in data2)
+                    {
+                    <option value="@k.Category_Id">@k.Name</option>
+                    }
+                    </select>  
+
 
                     
                     <div class="form_row">

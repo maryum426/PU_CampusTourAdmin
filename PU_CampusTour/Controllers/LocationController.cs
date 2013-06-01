@@ -23,7 +23,7 @@ namespace PU_CampusTour.Controllers
             
             
                 ViewBag.Message = "Done";
-                using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
+                using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
                 {
                     // saving dummy values in database
                    /* Place p = new Place()
@@ -50,6 +50,36 @@ namespace PU_CampusTour.Controllers
                    
         }
 
+       public ActionResult Request()
+       {
+
+
+           ViewBag.Message = "Done";
+           using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
+           {
+               // saving dummy values in database
+               /* Place p = new Place()
+                {
+                //p.Place_Id = 1;
+                Name = "Department of Biotechnology",
+                Description = "The Department of Biotechnology started in 1962",
+                Longitude = "16.90",
+                Latitude = "1.078",
+                Image = "E:/images/DE.jpg",
+                //Category_Id = 1
+                    
+                };
+
+                ctx.AddToPlaces(p);
+                ctx.SaveChanges();
+                */
+
+
+               // returning data in place class to be viewed
+               return View(ctx.Places.ToList());
+           }
+       }
+
         //
         // GET: /Add/
 
@@ -69,15 +99,17 @@ namespace PU_CampusTour.Controllers
             string longi = "";
             string lat = "";
             string image = "E:/images/DE.jpg";
+            int category = 0;
 
             // url = Request.Url[0];
             name = c["Name"];
             detail = c["Detail"];
             longi = c["Longitude"];
             lat = c["Latitude"];
+            category = Convert.ToInt32(c["Category"]);
 
 
-            using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
+            using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
             {
                 Place p = new Place()
                 {
@@ -86,7 +118,9 @@ namespace PU_CampusTour.Controllers
                     Description = detail,
                     Longitude = longi,
                     Latitude = lat,
-                    Image = image
+                    Image = image,
+                    isApproved = "True"
+
                     //Category_Id = 1
 
                 };
@@ -107,7 +141,7 @@ namespace PU_CampusTour.Controllers
         string url;
         public ActionResult Edit(int id)
         {
-            dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
+            dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
             var q = from s in db.Places
                     where s.Id == id
                     select s;
@@ -129,15 +163,17 @@ namespace PU_CampusTour.Controllers
             string longi = "";
             string lat = "";
             string image = "default";
+            int category = 0;
 
             // url = Request.Url[0];
             name = c["Name"];
             detail = c["Detail"];
             longi = c["Longitude"];
             lat = c["Latitude"];
+            category = Convert.ToInt32(c["Category"]);
 
             int id = Convert.ToInt32(c["id"]);
-            using (dbf522ec9140464818abf6a1c4013479aeEntities ctx = new dbf522ec9140464818abf6a1c4013479aeEntities())
+            using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
             {
 
                 var q = from s in ctx.Places
@@ -154,7 +190,10 @@ namespace PU_CampusTour.Controllers
                     t.Latitude = lat;
                    
                     t.Image = image;
+
+                    t.Category_Id = category;
                     
+                    t.isApproved = "True";
 
 
                 }
@@ -169,7 +208,7 @@ namespace PU_CampusTour.Controllers
 
         public ActionResult Delete(int id)
         {
-            dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
+            dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
             var q = from s in db.Places
                     where s.Id == id
                     select s;
@@ -187,7 +226,7 @@ namespace PU_CampusTour.Controllers
         
         public ActionResult DeleteAll(int[] deleteValues)
         {
-            dbf522ec9140464818abf6a1c4013479aeEntities db = new dbf522ec9140464818abf6a1c4013479aeEntities();
+            dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
             
             int[] MyCheckboxes = deleteValues;
 

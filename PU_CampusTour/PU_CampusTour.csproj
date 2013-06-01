@@ -296,6 +296,8 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Fyp.pubxml" />
+    <Content Include="Views\Client\Add.cshtml" />
+    <Content Include="Views\Location\Request.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
