@@ -7,6 +7,26 @@ font-size:12px;
 margin:0 auto;
 color: #0e4354;
 }
+
+header {
+  position: relative;
+}
+
+h1 {
+  width: 600px;
+ }
+
+h1 a
+{
+    float:right;
+}
+.add_link {
+   position: absolute;
+   top: 0;
+   right: 0;
+ }
+
+
 .clear{
 clear:both;
 }
@@ -254,7 +274,7 @@ color: #0e4354;
 }
 
 .sidebar_search{
-background:url(../images/sidebar_menu_top.gif) no-repeat center;
+/*background:url(../images/sidebar_menu_top.gif) no-repeat center;*/
 width:195px;
 height:31px;
 margin:0 0 5px 0;

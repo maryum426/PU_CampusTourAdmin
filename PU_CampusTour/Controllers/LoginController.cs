@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using PU_CampusTour.Models;
+
 namespace PU_CampusTour.Controllers
 {
+    [Authorize]
     public class LoginController : Controller
     {
         //
@@ -13,11 +16,25 @@ namespace PU_CampusTour.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("location","Login");
+            if (Request.Cookies["Login"].Value.ToLower() == "true")
+            {
+                return RedirectToAction("location", "Login");
+            }
+            else
+            {
+                return RedirectToAction("login", "Login");
+            }
         }
         public ActionResult Edit()
         {
-            return View();
+            if (Request.Cookies["Login"].Value.ToLower() == "true")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("login", "Login");
+            }
         }
 
         [HttpPost]
@@ -34,6 +51,10 @@ namespace PU_CampusTour.Controllers
             longi = c["Longitude"];
             lat = c["Latitude"];
 
+            if (lat == String.Empty || longi == String.Empty || detail == String.Empty || name == String.Empty)
+            {
+                return View("Edit");
+            }
         
             using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
             {
@@ -59,49 +80,109 @@ namespace PU_CampusTour.Controllers
             
             
         }
+        public ActionResult Category_Display()
+        {
+            
+
+                return View();
+           
+        }
+
+        // to display selected category items
+        [HttpPost]
+        public ActionResult Category_Display(FormCollection c)
+        {
+            
+
+            if (Request["Category"] != "All")
+            {
+                int id = Convert.ToInt32(Request["Category"]);
+                if (Request.Cookies["Login"].Value.ToLower() == "true")
+                {
+                    dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
+
+                    ViewBag.id = id;
+
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("login", "Login");
+                }
+            }
+            else
+            {
+                return RedirectToAction("location", "Login");
+            }
+
+        }
         public ActionResult Success()
         {
-            return View();
+            if (Request.Cookies["Login"].Value.ToLower() == "true")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("login", "Login");
+            }
         }
 
         public ActionResult Error()
         {
-            return View();
+            if (Request.Cookies["Login"].Value.ToLower() == "true")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("login","Login");
+            }
         }
 
         public ActionResult login()
         {
             //ViewBag.Message = "";
+            if (Request.Cookies["Login"].Value.ToLower() == "true")
+            {
+                Response.Cookies["Login"].Expires = DateTime.Now.AddDays(-1);
+            }
+            else
+            {
+
+                Response.Cookies["Login"].Value = false.ToString();
+            }
+
+
+            MvcApplication.login = false;
+            return View();
+        }
+
+        public ActionResult logout()
+        {
+            //ViewBag.Message = "";
+            Response.Cookies["Login"].Expires = DateTime.Now.AddDays(-1);
+            MvcApplication.login = false;
             return View();
         }
 
         public ActionResult location()
         {
-
-
-            ViewBag.Message = "Done";
-            using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
+            if (Request.Cookies["Login"].Value.ToLower()=="true")
             {
-                // saving dummy values in database
-                /* Place p = new Place()
-                 {
-                 //p.Place_Id = 1;
-                 Name = "Department of Biotechnology",
-                 Description = "The Department of Biotechnology started in 1962",
-                 Longitude = "16.90",
-                 Latitude = "1.078",
-                 Image = "E:/images/DE.jpg",
-                 //Category_Id = 1
-                    
-                 };
 
-                 ctx.AddToPlaces(p);
-                 ctx.SaveChanges();
-                 */
+                ViewBag.Message = "Done";
+                using (dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1())
+                {
+                   
 
-
-                // returning data in place class to be viewed
-                return View();
+                    // returning data in place class to be viewed
+                    return View();
+                }
+            }
+            else
+            {
+                return RedirectToAction("login", "Login");
             }
         }
 
@@ -109,39 +190,35 @@ namespace PU_CampusTour.Controllers
         public ActionResult DeleteAll(int[] deleteValues)
         {
             dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
-
-            int[] MyCheckboxes = deleteValues;
-
-
-            foreach (var item in MyCheckboxes)
+            if (Request.Cookies["Login"].Value.ToLower() == "true")
             {
-                var q = from s in db.Places
-                        where s.Id == Convert.ToInt32(item)
-                        select s;
-                foreach (var t in q)
-                {
-                    db.Places.Remove(t);
-                }
-                db.SaveChanges();
-            }
+                int[] MyCheckboxes = deleteValues;
 
-            return RedirectToAction("location", "Login");
+
+                foreach (var item in MyCheckboxes)
+                {
+                    var q = from s in db.Places
+                            where s.Id == Convert.ToInt32(item)
+                            select s;
+                    foreach (var t in q)
+                    {
+                        db.Places.Remove(t);
+                    }
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("location", "Login");
+            }
+            else
+            {
+                return RedirectToAction("login", "Login");
+            }
         }
         [HttpPost]
         public ActionResult login(FormCollection c)
         {
             dbf522ec9140464818abf6a1c4013479aeEntities1 ctx = new dbf522ec9140464818abf6a1c4013479aeEntities1();
-            // adding dummy data
-            
-            /*Admin p = new Admin()
-            {
-                Username="Admin",
-                Password="123"
-
-            };
-
-            ctx.AddToAdmins(p);
-            ctx.SaveChanges();*/
+           
 
             string username = "";
             string password = "";
@@ -163,19 +240,28 @@ namespace PU_CampusTour.Controllers
                     if (t.Username == c["Username"] && t.Password == c["Password"])
                     {
                         //ViewBag.Message = "";
+                        MvcApplication.login = true;
+                        Response.Cookies["Login"].Value = true.ToString();
+                      //return Request.Cookies["Login"].Value.ToString();
+                       //return View();
                         return RedirectToAction("location");
+
+                        
                     }
                     else
                     {
                         ViewBag.Message = "Login Fails. Username and Password doesnot match";
+                        //return ("ok");
                         return View("login");
                     }
                 }
-                 return View();
+                return View();
+               // return ("ok");
             }
             else
             {
-                return RedirectToAction("Error");
+               //return ("ok");
+               return RedirectToAction("Error");
             }
            
             

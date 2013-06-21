@@ -7,9 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Campus Tour Using Augmented Reality - Login</title>
-<link rel="stylesheet" type="text/css" href="../style.css" />
-<script type="text/javascript" src="../jquery.min.js"></script>
-<script type="text/javascript" src="../ddaccordion.js"></script>
+<link rel="stylesheet" type="text/css" href="~/style.css" />
+<link rel="icon" 
+  type="image/jpg" 
+  href="/images/logo.jpg"/>
+<script type="text/javascript" src="~/jquery.min.js"></script>
+<script type="text/javascript" src="~/ddaccordion.js"></script>
 <script type="text/javascript">
     ddaccordion.init({
         headerclass: "submenuheader", //Shared CSS class name of headers group
@@ -22,7 +25,7 @@
         animatedefault: false, //Should contents open by default be animated into view?
         persiststate: true, //persist state of opened contents within browser session?
         toggleclass: ["", ""], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
-        togglehtml: ["suffix", "<img src='images/plus.gif' class='statusicon' />", "<img src='images/minus.gif' class='statusicon' />"], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
+        togglehtml: ["suffix", "<img src='/images/plus.gif' class='statusicon' />", "<img src='/images/minus.gif' class='statusicon' />"], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
         animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
         oninit: function (headers, expandedindices) { //custom code to run when headers have initalized
             //do nothing
@@ -33,7 +36,7 @@
     })
 </script>
 
-<script type="text/javascript" src="../jconfirmaction.jquery.js"></script>
+<script type="text/javascript" src="~/jconfirmaction.jquery.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -42,15 +45,15 @@
 	
 </script>
 
-<script language="javascript" type="text/javascript" src="../niceforms.js"></script>
-<link rel="stylesheet" type="text/css" media="all" href="../niceforms-default.css" />
+<script language="javascript" type="text/javascript" src="~/niceforms.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="~/niceforms-default.css" />
 
 </head>
 <body>
 <div id="main_container">
 
 	<div class="header_login">
-    <div class="logo"><a href="#"><img src="../images/punjablogo.jpg" alt="" title="" border="0" /></a><p style="color:#FF0000;font-size:20px;font-weight:500">PU Campus Tour</p></div>
+    <div class="logo"><a href="#"><img src="~/images/punjablogo.jpg" alt="" title="" border="0" /></a><p style="color:#FF0000;font-size:20px;font-weight:500">PU Campus Tour</p></div>
     
     </div>
 
@@ -59,7 +62,7 @@
          
          <h3  style="color:#FF0000" >Admin Panel Login</h3>
          
-         <a href="#"  style="color:#FF0000"  class="forgot_pass">Forgot password</a> 
+        <!--<a href="#"  style="color:#FF0000"  class="forgot_pass">Forgot password</a>--> 
          
          
          <form action="" method="post" class="niceform" action="Login/login">

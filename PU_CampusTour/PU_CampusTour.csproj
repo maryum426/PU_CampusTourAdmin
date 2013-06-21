@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -249,6 +250,9 @@
     <Content Include="jquery.min.js" />
     <Content Include="niceforms-default.css" />
     <Content Include="niceforms.js" />
+    <Content Include="Slider\jquery.nivo.slider.js" />
+    <Content Include="Slider\jquery.nivo.slider.pack.js" />
+    <Content Include="Slider\nivo-slider.css" />
     <Content Include="style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -297,7 +301,15 @@
     </Content>
     <None Include="Properties\PublishProfiles\Fyp.pubxml" />
     <Content Include="Views\Client\Add.cshtml" />
-    <Content Include="Views\Location\Request.cshtml" />
+    <Content Include="Views\Location\Requestplace.cshtml" />
+    <Content Include="Views\Login\Category_Display.cshtml" />
+    <Content Include="Views\Category\Cat_Add.cshtml" />
+    <Content Include="Views\Category\Cat_Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Location\Change_Password.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -315,7 +327,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>4534</DevelopmentServerPort>
+          <DevelopmentServerPort>7085</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
