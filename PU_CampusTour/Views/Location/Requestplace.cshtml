@@ -1,0 +1,64 @@
+﻿@using PU_CampusTour.Models;
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Request";
+    var id = Convert.ToInt32(ViewBag.id);
+
+    dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
+    
+    var q = from s in db.Places where s.isApproved == "False" select s ;
+
+    
+    var data2 = from s in db.Categories select s;
+   
+}
+
+
+@section Requests{   
+        
+    <h2>Requests</h2> 
+                    
+               <br /><br /><br />     
+
+    @using (Html.BeginForm()){            
+<table id="rounded-corner" summary="2007 Major IT Companies' Profit">
+    <thead>
+    	<tr>
+        	<th scope="col" class="rounded-company"></th>
+            <th scope="col" class="rounded">Place Name</th>
+            <th scope="col" class="rounded">Details</th>
+           <th scope="col" class="rounded">Longitude</th>
+            <th scope="col" class="rounded">Latitude</th>
+            <th scope="col" class="rounded">Accept</th>
+            <th scope="col" class="rounded-q4">Delete</th>
+        </tr>
+    </thead>
+    
+       
+            <tbody>
+     @foreach (var row in q) {
+          <tr>
+           
+            <td><input type="hidden" name="MyCheckboxes" value="@row.Id" /></td>
+            <td> @row.Name</td>
+            <td> @row.Description</td>
+            <td> @row.Longitude</td>
+            <td> @row.Latitude</td>
+           
+            <!--<td><a href="~/Admin/Admin_Update/row.Id">Edit</a></td>-->
+            <td> <a href="@Url.Action("Edit","Location", new { id = @row.Id })">Accept</a> </td>            
+          <td><a href="@Url.Action("Delete", "Location", new { id = @row.Id })">Delete</a></td>
+          </tr>
+        }
+    </tbody>
+    
+</table>
+    	
+    }
+    
+
+<br /><br />
+	 
+      
+     
+     }

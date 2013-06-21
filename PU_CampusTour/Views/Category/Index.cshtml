@@ -1,0 +1,75 @@
+﻿@using PU_CampusTour.Models;
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
+
+    var q = from s in db.Categories select s;
+    var d = from p in db.Categories select p;
+    
+  
+}
+
+@section manage_cat{           
+        
+    <h2> Category Settings<h4> <a href="@Url.Action("Cat_Add", "Category", new { id = 0 })" class="bt_red"><span class="bt_green_lft" style="margin-left:20px"></span><strong>Add New Category</strong><span class="bt_green_r"></span></a></h4> 
+     </h2>
+     
+               
+                    
+<table id="rounded-corner" summary="2007 Major IT Companies' Profit">
+    <thead>
+    	<tr>
+        	<th scope="col" class="rounded-company"></th>
+            <th scope="col" class="rounded">Name</th>
+            <!--<th scope="col" class="rounded">Details</th>
+            <th scope="col" class="rounded">Longitude</th>
+            <th scope="col" class="rounded">Latitude</th>-->
+            <th scope="col" class="rounded">Edit</th>
+            <th scope="col" class="rounded-q4">Delete</th>
+        </tr>
+    </thead>
+        <tfoot>
+    	<tr>
+        	
+
+        </tr>
+    </tfoot>
+    <form method="post" action="/Location/Edit">
+    <tbody>
+
+    @foreach (var row in q) {
+          <tr>
+           
+            <td><input type="hidden" name="MyCheckboxes" value="@row.Category_Id" /></td>
+            <td> @row.Name</td>
+            
+           
+            <!--<td><a href="~/Admin/Admin_Update/row.Id">Edit</a></td>-->
+            <td> <a href="@Url.Action("Cat_Edit","Category", new { id = @row.Category_Id })"><img src="~/images/user_edit.png" alt="" title="" border="0" /></a> </td>            
+          <td><a href="@Url.Action("Cat_Delete", "Category", new { id = @row.Category_Id })"><img src="~/images/trash.png" alt="" title="" border="0" /></a></td>
+          </tr>
+        }
+   
+    </form>
+    	
+    </tbody>
+    
+</table>
+<br /><br />
+@using (Html.BeginForm())
+{
+	<!-- <a href=@Href("/Category/Cat_Add") class="bt_red"><span class="bt_green_lft"></span><strong>Add New Category</strong><span class="bt_green_r"></span></a>
+     
+    <!-- <a class="bt_red" href="@Url.Action("DeleteAll","Category")"><span class="bt_red_lft"></span><strong>Delete Category</strong><span class="bt_red_r"></span></a> -->
+     
+    
+       <!-- <div class="pagination">
+        <span class="disabled"><< prev</span><span class="current">1</span><a href="">2</a><a href="">3</a><a href="">4</a><a href="">5</a>…<a href="">10</a><a href="">11</a><a href="">12</a>...<a href="">100</a><a href="">101</a><a href="">next >></a>
+        </div>--> 
+     <br /><br />
+     
+           <br /><br />
+}
+      
+     }

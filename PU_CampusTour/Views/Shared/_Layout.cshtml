@@ -1,0 +1,182 @@
+﻿@using PU_CampusTour.Models;
+@{
+    ViewBag.Title = "_Layout";
+    dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
+
+    var q = from s in db.Places where s.isApproved == "True" select s;
+
+    var data2 = from s in db.Categories select s;
+
+    int id = (from e in db.Places select e.Id).Max();
+
+    var r = from e in db.Places where e.Id == id select e.Name;
+
+    string lastname = "";
+    foreach (var t in r)
+    {
+        lastname = t;
+    }
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Admin Panel</title>
+<base href="http://localhost:7085/" />
+<link rel="stylesheet" type="text/css" href="~/style.css" />
+
+@RenderPage("/Views/Shared/_Header.cshtml")
+
+
+</head>
+
+
+<body>
+<div id="main_container">
+
+	<div class="header">
+    <div class="logo"><a href="#"><img src="/images/logo.jpg" alt="" title="" border="0" /> <img src="/images/logo2.jpg" alt="" title="" border="0" /></a> </div>
+    
+    <div class="right_header">Welcome Admin <!--<a href="#">Visit site</a> | <a href="#" class="messages">(3) Messages</a>--> | <a href="@Url.Action("login","Login")" class="logout">Logout</a></div>
+    <div id="clock_a"></div>
+    </div>
+    
+    <div class="main_content">
+    
+                    <div class="menu">
+                    <ul>
+                    <li><a class="current" href="@Url.Action("location","Login")">Admin Home</a></li>
+                    <li><a href="@Url.Action("Index","Category")">Manage Categories<!--[if IE 7]><!--></a><!--<![endif]--></li>
+                    <li><a href="@Url.Action("Requestplace","Location")">Requests<!--[if IE 7]><!--></a><!--<![endif]-->
+                   
+                    </li>
+                    <li><a href="@Url.Action("Change_Password","Location")">Change Password<!--[if IE 7]><!--></a><!--<![endif]-->
+                   
+                    </li>
+                   
+                    
+                    </ul>
+                    </div> 
+                    
+                    
+                    
+                    
+    <div class="center_content">  
+    
+     
+    
+    <div class="left_content">
+    
+    		<div class="sidebar_search">
+            <form>
+           <!--<input type="text" name="" class="search_input" value="search keyword" onclick="this.value=''" />
+            <input type="image" class="search_submit" src="~/images/search.png" />-->
+            </form>            
+            </div>
+
+           
+           
+            <!--Slider-->
+
+<div class="slider-wrapper">
+    <div id="slider" class="nivoSlider">
+        
+        <img src="/images/1.jpg" alt="" />
+        <img src="/images/2.jpg" alt="" />
+       
+        <img src="/images/4.jpg" alt="" />
+        <img src="/images/5.jpg" alt="" />
+         <img src="/images/6.jpg" alt="" />
+          <img src="/images/7.jpg" alt="" />
+          <img src="/images/3.jpg" alt="" />
+     </div>
+</div>
+               
+<!--end of Slider-->
+            
+            
+   <!-- <img src="~/images/punjablogo.jpg" alt="" title="" border="0" style="margin-left:50px" />-->
+            <div class="sidebarmenu">
+
+            <div style="margin-left:30px; margin-right:10px; width:170px; height:170px">
+
+            <marquee  behavior="scroll" direction="up" scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();"><b>Information!</b> <img src="/images/info.png" alt="" />
+           <br /> <br /> New Place @lastname has been added by the admin.
+           <br /> <br /> You can check pending add place request from user through <a href="@Url.Action("Requestplace", "Location")">Requests</a>
+            <br /> <br /> More Categories can be added, deleted or updated through <a href="@Url.Action("Index", "Category")">Manage Categories</a>
+            </marquee>
+
+
+            </div>
+
+            <!--
+                <a class="menuitem submenuheader" href="">Categories </a>
+                <div class="submenu">
+                  
+                    <ul>
+                    @foreach(var k in data2)
+                    {
+                    <li><a href="@Url.Action("Category_Display", "Login", new { id = @k.Category_Id })">@k.Name</a></li>
+                    }
+                    </ul>
+                </div>
+                -->
+               <!-- <a class="menuitem submenuheader" href="">Add new Place</a>-->
+               
+                
+                    
+            </div>
+            
+           
+              
+    
+    </div>  
+    <br />
+   
+
+    <div class="right_content">  
+
+    @RenderSection("location",false)
+
+    @RenderSection("Category",false)
+
+    @RenderSection("Add_Location",false)
+
+    @RenderSection("Change_pswd",false)
+    
+    @RenderSection("Edit_Location",false)
+
+    @RenderSection("Requests",false)
+
+    @RenderSection("manage_cat",false)
+
+    @RenderSection("Cat_Add",false)
+
+    @RenderSection("Cat_Edit",false)
+
+    </div><!-- end of right content-->
+            
+                    
+  </div>   <!--end of center content -->               
+                    
+                    
+    
+    
+    <div class="clear"></div>
+    </div> <!--end of main content-->
+
+    @RenderPage("/Views/Shared/_Footer.cshtml")
+
+     <!--Script for slider-->
+
+        <script type="text/javascript">
+            $(window).load(function () {
+                $('#slider').nivoSlider();
+            });
+        </script>
+        </div>
+
+		
+</body>
+</html>

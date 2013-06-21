@@ -1,0 +1,54 @@
+﻿@using PU_CampusTour.Models;
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    dbf522ec9140464818abf6a1c4013479aeEntities1 db = new dbf522ec9140464818abf6a1c4013479aeEntities1();
+    var id=Convert.ToInt32(ViewBag.id);
+    int id1 = Convert.ToInt32(id);
+    var q = from s in db.Categories where s.Category_Id==id1 select s;
+    ViewBag.Title = "Edit";
+
+    var d = from p in db.Categories select p;
+    //var id = Convert.ToInt32(ViewBag.id);
+}
+
+
+@section Cat_Edit{          
+       
+       <br />
+        <div style="margin-left:100px">
+    <h2>Category Updation</h2> 
+                    
+                   <h4>   @ViewBag.MSG  </h4>   
+
+    <form method="post" action="/Category/Cat_Edit">
+    
+    <br /><br />
+    	 <input type="hidden" name="id" value=@id />
+
+                @foreach (var t in q)
+                {
+                    
+                    <label><strong>Place Name:</strong></label>
+                    <br />
+                    <input type="text" name="Name" value="@t.Name" />
+                      
+                      <br /><br />
+                   
+                }
+             
+                    
+                    
+                    <div class="form_row">
+                <input type="submit" class="register" value="Update" />
+                    </div>   
+      
+    </form>
+    	
+    
+    
+
+<br /><br />
+	 
+      </div>
+     
+     }
